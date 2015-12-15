@@ -54,7 +54,7 @@ class Account:
         html = response.read()
         parsed_html = BeautifulSoup(html, "html.parser")
 
-        # The ids of all the account information values
+        # The HTML ids of all the account information values
         acct_val_id = "ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblAccountValue"
         buying_power_id= "ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblBuyingPower"
         cash_id = "ctl00_MainPlaceHolder_currencyFilter_ctrlPortfolioDetails_PortfolioSummary_lblCash"
@@ -86,6 +86,15 @@ class Account:
         Returns a Securities object containing
         bought securities and shorted securities
         """
+
+        response = self.fetch('/simulator/portfolio/')
+        html = response.read()
+        parsed_html = BeautifulSoup(html, "html.parser")
+
+        # class that contains the table is "table1 bdr1"
+        # can scrape everything within the table, but we end up
+        # with a lot of unnecessary information
+
 
     def trade(self, symbol, orderType, quantity, priceType="Market", price=False, duration=Duration.good_cancel):
         """
