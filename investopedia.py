@@ -18,7 +18,7 @@ class Duration(Enum):
 
 
 Status = namedtuple("Status", "account_val buying_power cash annual_return")
-
+Securities = namedtuple("Securities", "bought shorted")
 
 class Account:
     BASE_URL = 'http://www.investopedia.com'
@@ -80,6 +80,12 @@ class Account:
             cash=cash,
             annual_return=annual_return,
         )
+
+    def get_current_securites(self):
+        """
+        Returns a Securities object containing
+        bought securities and shorted securities
+        """
 
     def trade(self, symbol, orderType, quantity, priceType="Market", price=False, duration=Duration.good_cancel):
         """
